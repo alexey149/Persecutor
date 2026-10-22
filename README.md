@@ -1,8 +1,6 @@
 # Persecutor — преследование на Unity
 
-![Демо: игрок и бот проходят ступеньку, подъём, спуск и барьер](Video/preview.gif)
-
-🎬 Полное видео (33 с): [Video/Persecutor_demo.mp4](Video/Persecutor_demo.mp4)
+🎬 Видео-демо (33 с): [Video/Persecutor_demo.mp4](Video/Persecutor_demo.mp4)
 
 Учебный проект на Unity 6 (6000.3.23f1, URP).
 
