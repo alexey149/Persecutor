@@ -61,3 +61,12 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Unity: бинарные файлы
+###############################################################################
+*.fbx binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.mp4 binary
