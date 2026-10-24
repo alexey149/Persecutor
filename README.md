@@ -1,6 +1,8 @@
 # Persecutor — преследование на Unity
 
-🎬 Видео-демо (33 с): [Video/Persecutor_demo.mp4](Video/Persecutor_demo.mp4)
+🎬 Видео-демо преследования (33 с): [Video/Persecutor_demo.mp4](Video/Persecutor_demo.mp4)
+
+🎬 Видео-демо джоинтов (21 с): [Video/Joints_demo.mp4](Video/Joints_demo.mp4)
 
 Учебный проект на Unity 6 (6000.3.23f1, URP).
 
@@ -8,13 +10,16 @@
 - **Бот** двигается на `Rigidbody`. Он преследует игрока, не подходит ближе 3 м и всегда медленнее.
 - Анимация (стойка, ходьба, прыжок) — через `Animator` и Animator Controller.
 - На уровне есть ступенька, подъём, спуск и барьер. Игрок и бот проходят их одинаково: оба берут высоту ступеньки, угол склона, высоту прыжка и гравитацию из общего ассета `TraversalSettings`.
+- Отдельная сцена `Joints` — качели на `Hinge Joint` и катапульта на `Spring Joint`.
 
 ## Как запустить
 
 1. Открыть папку проекта в Unity Hub (Unity 6000.3.23f1).
-2. Открыть сцену `Assets/_Project/Scenes/PersecutorDemo.unity` и нажать **Play**.
+2. Открыть сцену `Assets/_Project/Scenes/PersecutorDemo.unity` (преследование) или `Assets/_Project/Scenes/Joints.unity` (качели и катапульта) и нажать **Play**.
 
 ## Управление
+
+Сцена `PersecutorDemo`:
 
 | Клавиша | Действие |
 |---|---|
@@ -23,6 +28,14 @@
 | Мышь | поворот камеры |
 | Esc / клик в окне игры | отпустить / захватить курсор |
 
+Сцена `Joints`:
+
+| Клавиша | Действие |
+|---|---|
+| E | толкнуть качели |
+| Space | выстрел катапульты |
+| R | вернуть ложку и положить новый снаряд |
+
 ## Структура
 
 ```
@@ -30,11 +43,13 @@ Assets/
 ├── _Project/
 │   ├── Animations/         клипы Idle, Walk, Jump и контроллер Character
 │   ├── PhysicsMaterials/   Frictionless — материал без трения для бота
-│   ├── Scenes/             PersecutorDemo
+│   ├── Prefabs/            Projectile — снаряд катапульты
+│   ├── Scenes/             PersecutorDemo, Joints
 │   ├── Scripts/
 │   │   ├── Animations/     CharacterAnimation
 │   │   ├── Bot/            BotChaser, BotMover, PlayerTrail, GroundSensor, JumpObstacleSensor
 │   │   ├── Cameras/        ThirdPersonCamera
+│   │   ├── Joints/         Swing, Catapult
 │   │   ├── Movement/       TraversalSettings, VectorExtensions
 │   │   └── Player/         PlayerMovement
 │   └── Settings/           TraversalSettings — общие параметры проходимости
@@ -56,6 +71,8 @@ Assets/
 | `TraversalSettings` | общие для игрока и бота высота ступеньки, угол склона, высота прыжка и гравитация |
 | `CharacterAnimation` | передаёт в `Animator` скорость и признак «на земле» |
 | `ThirdPersonCamera` | камера от третьего лица |
+| `Swing` | по нажатию толкает сиденье качелей импульсом по направлению движения |
+| `Catapult` | переключает пружину ложки между точкой покоя и точкой выстрела, создаёт снаряд |
 
 Все ссылки между объектами задаются в инспекторе.
 
@@ -65,7 +82,18 @@ Assets/
 
 **Скорость бота** — 70 % от скорости игрока: 3,5 м/с против 5 м/с.
 
-## Уровень
+## Джоинты
+
+Сцена `Assets/_Project/Scenes/Joints.unity` собрана из стандартных кубов и сферы.
+
+**Качели.** Сиденье висит на `Hinge Joint` с осью X, точка крепления — на перекладине. Клавиша E добавляет импульс по направлению текущего движения (или вперёд, если качели стоят), поэтому несколько нажатий раскачивают их сильнее.
+
+**Катапульта.** Ложка вращается на `Hinge Joint` с пределами ±50°, а тянет её `Spring Joint`. Свободный конец пружины (`connectedAnchor`) переставляется:
+
+- в покое он внизу (`Rest Anchor`), ложка прижата к упору и держит снаряд;
+- Space переносит его вверх (`Launch Anchor`): ложка поднимается до предела 50° и останавливается, а снаряд — отдельный `Rigidbody` — летит дальше по физике;
+- R возвращает пружину вниз. Когда ложка легла на упор и остановилась, в ней появляется новый снаряд из префаба `Projectile`.
+
 
 | Препятствие | Размер |
 |---|---|
