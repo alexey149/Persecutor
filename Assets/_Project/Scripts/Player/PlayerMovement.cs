@@ -1,3 +1,4 @@
+using Persecutor.Animations;
 using Persecutor.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ namespace Persecutor.Player
         [SerializeField] private Transform _cameraTransform;
         [SerializeField] private InputActionReference _moveAction;
         [SerializeField] private InputActionReference _jumpAction;
+        [SerializeField] private CharacterAnimation _animation;
         [SerializeField, Min(0f)] private float _moveSpeed = 5f;
         [SerializeField, Min(0f)] private float _turnSpeed = 720f;
         [SerializeField, Min(0f)] private float _groundSnapSpeed = 6f;
@@ -49,6 +51,7 @@ namespace Persecutor.Player
             UpdateVerticalSpeed();
             _characterController.Move((horizontalVelocity + Vector3.up * _verticalSpeed) * Time.deltaTime);
             RotateTowards(horizontalVelocity);
+            _animation.SetMovement(_characterController.velocity, _characterController.isGrounded);
         }
 
         private Vector3 CalculateHorizontalVelocity()

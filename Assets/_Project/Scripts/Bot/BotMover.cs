@@ -1,3 +1,4 @@
+using Persecutor.Animations;
 using Persecutor.Movement;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Persecutor.Bot
         private const float MinSquaredDirectionLength = 0.0001f;
 
         [SerializeField] private TraversalSettings _traversalSettings;
+        [SerializeField] private CharacterAnimation _animation;
         [SerializeField] private LayerMask _environmentMask = Physics.DefaultRaycastLayers;
         [SerializeField, Min(0f)] private float _turnSpeed = 540f;
         [SerializeField, Min(0f)] private float _obstacleCheckDistance = 1f;
@@ -47,6 +49,8 @@ namespace Persecutor.Bot
             {
                 _rigidbody.linearVelocity = CalculateAirVelocity(horizontalVelocity, verticalSpeed, deltaTime);
             }
+
+            _animation.SetMovement(_rigidbody.linearVelocity, _isGrounded);
         }
 
         public void Rotate(Vector3 direction, float deltaTime)
