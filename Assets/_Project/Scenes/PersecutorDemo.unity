@@ -1093,6 +1093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393696923}
+  - component: {fileID: 393696924}
   m_Layer: 0
   m_Name: Swing
   m_TagString: Untagged
@@ -1119,6 +1120,25 @@ Transform:
   - {fileID: 1854686039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &393696924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393696922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655c0a172638557448fb7658e2019c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Persecutor.Joints.InteractionRange
+  _player: {fileID: 1911421926}
+  _colliders:
+  - {fileID: 1728315007}
+  - {fileID: 876824063}
+  - {fileID: 1304944423}
+  - {fileID: 1130503721}
+  _radius: 1.5
 --- !u!1 &557619653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,6 +2044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274313628}
   - component: {fileID: 1274313627}
+  - component: {fileID: 1274313629}
   m_Layer: 0
   m_Name: Catapult
   m_TagString: Untagged
@@ -2043,6 +2064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a58cb2d983214f4aa122d254aa32674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Persecutor.Joints.Catapult
+  _interactionRange: {fileID: 1274313629}
   _spoon: {fileID: 2011228063}
   _spring: {fileID: 2011228062}
   _restAnchor: {fileID: 1368416340}
@@ -2077,6 +2099,30 @@ Transform:
   - {fileID: 2142750165}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1274313629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274313626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655c0a172638557448fb7658e2019c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Persecutor.Joints.InteractionRange
+  _player: {fileID: 1911421926}
+  _colliders:
+  - {fileID: 1388318649}
+  - {fileID: 29984}
+  - {fileID: 1104712090}
+  - {fileID: 320316357}
+  - {fileID: 360888026}
+  - {fileID: 1232614011}
+  - {fileID: 565753217}
+  - {fileID: 376577076}
+  - {fileID: 62645182}
+  _radius: 1.5
 --- !u!1 &1304944420
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,6 +3232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca995039eeba2e74cabf0bd51d407353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Persecutor.Joints.Swing
+  _interactionRange: {fileID: 393696924}
   _pushAction: {fileID: -210054436416369845, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _pushImpulse: 4
 --- !u!59 &1854686041

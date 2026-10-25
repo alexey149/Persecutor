@@ -6,6 +6,7 @@ namespace Persecutor.Joints
 {
     public class Catapult : MonoBehaviour
     {
+        [SerializeField] private InteractionRange _interactionRange;
         [SerializeField] private Rigidbody _spoon;
         [SerializeField] private SpringJoint _spring;
         [SerializeField] private Transform _restAnchor;
@@ -52,7 +53,7 @@ namespace Persecutor.Joints
 
         private void OnLaunch(InputAction.CallbackContext context)
         {
-            if (_isLoaded == false)
+            if (_isLoaded == false || _interactionRange.IsPlayerInRange() == false)
             {
                 return;
             }
@@ -63,7 +64,7 @@ namespace Persecutor.Joints
 
         private void OnReload(InputAction.CallbackContext context)
         {
-            if (_isLoaded || _isReloading)
+            if (_isLoaded || _isReloading || _interactionRange.IsPlayerInRange() == false)
             {
                 return;
             }

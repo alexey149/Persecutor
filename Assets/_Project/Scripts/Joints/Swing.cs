@@ -8,6 +8,7 @@ namespace Persecutor.Joints
     {
         private const float MinSquaredSpeed = 0.01f;
 
+        [SerializeField] private InteractionRange _interactionRange;
         [SerializeField] private InputActionReference _pushAction;
         [SerializeField, Min(0f)] private float _pushImpulse = 4f;
 
@@ -32,6 +33,11 @@ namespace Persecutor.Joints
 
         private void OnPush(InputAction.CallbackContext context)
         {
+            if (_interactionRange.IsPlayerInRange() == false)
+            {
+                return;
+            }
+
             Vector3 velocity = _rigidbody.linearVelocity;
             Vector3 direction = velocity.sqrMagnitude > MinSquaredSpeed ? velocity.normalized : transform.forward;
 
